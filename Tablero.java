@@ -34,30 +34,25 @@ public class Tablero {
     public void introducir() {
         Scanner leer = new Scanner(System.in);
         int fila = 0, columna = 0;
-        if (turno % 2 == 0) {
-            System.out.println("Jugador 1 es tu turno");
-            System.out.println("Introduce fila");
-            fila = leer.nextInt();
-            System.out.println("Introduce columna");
-            columna = leer.nextInt();
-            if ((juego[fila][columna] == 'X') || (juego[fila][columna] == 'O')) {
-                System.out.println("La fila " + fila + " y la columna " + columna + " Esta ocupada");
-                introducir();
-            } else {
-                juego[fila][columna] = 'X';
-            }
+        char ficha;
+        int jugador;
+        if(turno % 2 == 0){
+            ficha='X';
+            jugador=1;
+        }else{
+            jugador=2;
+            ficha='O';
+        }
+        System.out.println("Jugador" + jugador + "es tu turno");
+        System.out.println("Introduce fila");
+        fila = leer.nextInt();
+        System.out.println("Introduce columna");
+        columna = leer.nextInt();
+        if ((juego[fila][columna] == 'X') || (juego[fila][columna] == 'O')) {
+            System.out.println("La fila " + fila + " y la columna " + columna + " Esta ocupada");
+            introducir();
         } else {
-            System.out.println("Jugador 2 es tu turno");
-            System.out.println("Introduce fila");
-            fila = leer.nextInt();
-            System.out.println("Introduce columna");
-            columna = leer.nextInt();
-            if ((juego[fila][columna] == 'X') || (juego[fila][columna] == 'O')) {
-                System.out.println("La fila " + fila + " y la columna " + columna + " Esta ocupada");
-                introducir();
-            } else {
-                juego[fila][columna] = 'O';
-            }
+            juego[fila][columna] = ficha;
         }
     }
     // Comprueba el empate
