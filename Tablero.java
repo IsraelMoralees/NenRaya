@@ -1,29 +1,15 @@
-import java.util.Scanner;
+public class Tablero {
+        char juego [][];
+        int turno=0;
 
-public class tresenraya {
-    public static void main(String[] args) {
-        int turno = 0;
-        int fila = 0;
-        int columna = 0;
-        int dimension = 0;
 
-        System.out.println("Introduce la dimension del N en raya");
-        Scanner leer=new Scanner(System.in);
-        dimension=leer.nextInt();
-
+    public char [][] IntDimensiones(int dimension){
         char juego [][] = new char[dimension][dimension];
-
-        do {
-            rellenar(juego);
-            introducir(turno, fila, columna, juego);
-            turno++;
-        } while (!ComprobarFilas(juego));
-        System.out.println();
-        rellenar(juego);
+        return juego;
     }
 
     // Metodo para mostrar el tablero del juego
-    public static void rellenar(char juego[][]) {
+    public void rellenar() {
         for (int i = 0; i < juego.length; i++) {
             for (int j = 0; j < juego.length; j++) {
                 if ((juego[i][j] == 'X') || (juego[i][j] == 'O')) {
@@ -38,44 +24,32 @@ public class tresenraya {
     }
 
     // Metodo introducir casillas en el tablero
-    public static void introducir(int turno, int fila, int columna, char juego[][]) {
-        Scanner leer = new Scanner(System.in);
+    public void introducir(int fila, int columna) {
         if (turno % 2 == 0) {
-            System.out.println("Jugador 1 es tu turno");
-            System.out.println("Introduce fila");
-            fila = leer.nextInt();
-            System.out.println("Introduce columna");
-            columna = leer.nextInt();
             if ((juego[fila][columna] == 'X') || (juego[fila][columna] == 'O')) {
                 System.out.println("La fila " + fila + " y la columna " + columna + " Esta ocupada");
-                introducir(turno, fila, columna, juego);
+                introducir(fila, columna);
             } else {
                 juego[fila][columna] = 'X';
             }
         } else {
-            System.out.println("Jugador 2 es tu turno");
-            System.out.println("Introduce fila");
-            fila = leer.nextInt();
-            System.out.println("Introduce columna");
-            columna = leer.nextInt();
             if ((juego[fila][columna] == 'X') || (juego[fila][columna] == 'O')) {
                 System.out.println("La fila " + fila + " y la columna " + columna + " Esta ocupada");
-                introducir(turno, fila, columna, juego);
+                introducir(fila, columna);
             } else {
                 juego[fila][columna] = 'O';
             }
         }
     }
-
-    public static boolean Empate(int dimension, int turno) {
+    public boolean Empate() {
         // Mira el empate
-        if (turno == dimension * dimension) {
+        if (turno == juego.length * juego.length) {
             System.out.println("Empate!");
             return true;
         }
         return false;
     }
-    public static boolean ComprobarFilas(char juego[][]){
+    public boolean ComprobarFilas(char juego[][]){
         for (int i=0; i<juego.length; i++){
             int contX=0;
             int contO=0;
@@ -96,7 +70,7 @@ public class tresenraya {
         }
         return false;
     }
-    public static boolean ComprobarCol(char juego[][]){
+    public boolean ComprobarCol(char juego[][]){
         for (int i=0; i<juego.length; i++){
             int contX=0;
             int contO=0;
@@ -117,7 +91,7 @@ public class tresenraya {
         }
         return false;
     }
-    public static boolean ComprobarDiagonal(char juego[][]){
+    public boolean ComprobarDiagonal(char juego[][]){
         for (int i=0; i<juego.length; i++){
             int contX=0;
             int contO=0;
@@ -138,5 +112,10 @@ public class tresenraya {
         }
         return false;
     }
-    
+    public boolean Fin (){
+        if(ComprobarCol(juego)==true||ComprobarDiagonal(juego)==true||ComprobarFilas(juego)==true||Empate()==true){
+            return true;
+        }
+        return false;
+    }
 }
