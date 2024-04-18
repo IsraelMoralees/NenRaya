@@ -3,16 +3,10 @@ import java.util.Scanner;
 public class Tablero {
     // VARIABLES
     private char juego[][];
-    private int turno = 0;
-
+    private int empate=0;
     // Constructor para el tablero
     public Tablero(int dimension) {
         juego = new char[dimension][dimension];
-    }
-
-    //Suma el turno despues de cada iteracion
-    public void SumarTurnos() {
-        turno++;
     }
 
     // Metodo para mostrar el tablero del juego
@@ -34,15 +28,7 @@ public class Tablero {
     public void introducir() {
         Scanner leer = new Scanner(System.in);
         int fila = 0, columna = 0;
-        char ficha;
-        int jugador;
-        if(turno % 2 == 0){
-            ficha='X';
-            jugador=1;
-        }else{
-            jugador=2;
-            ficha='O';
-        }
+
         System.out.println("Jugador" + jugador + "es tu turno");
         System.out.println("Introduce fila");
         fila = leer.nextInt();
@@ -55,10 +41,16 @@ public class Tablero {
             juego[fila][columna] = ficha;
         }
     }
+
+    //Metodo para sumar la variable empate
+    public void SumaEmpate(){
+        empate++;
+    }
+
     // Comprueba el empate
     private boolean Empate() {
-        if (turno == juego.length * juego.length) {
-            System.out.println("Empate!");
+        if (empate == juego.length * juego.length) {
+            System.out.println("Fin, el juego ha acabado en Empate!");
             return true;
         }
         return false;
