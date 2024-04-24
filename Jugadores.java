@@ -1,54 +1,15 @@
 import java.util.Scanner;
-public class Jugadores {
+public class Jugadores extends Juego {
 
     // VARIABLES
     private String nombre;
-    private enum Fichas{X,O};
-    private Fichas fichas;
-    private int turno = 0;
-
+    protected enum Fichas{X,O};
+    protected Fichas fichas;
 
     // CONSTRUCTORES
     public Jugadores(String nombre, String fichas) {
         this.nombre = nombre;
         this.fichas = Fichas.valueOf(fichas);
-    }
-
-
-    //Suma el turno despues de cada iteracion
-    public void SumarTurnos() {
-        turno++;
-    }
-
-    // Metodo para elegir quien empieza
-    public void ElegirComiezo(){
-        Scanner leer=new Scanner(System.in);
-        System.out.println("¿Quien quiere comenzar?");
-        int num = leer.nextInt();
-
-        if (num==1){
-            turno=0;
-        }else{
-            turno=1;
-        }
-    }
-
-    //Metodo para cambiar de turno
-    public void CambiarTurno(){
-        char ficha=0;
-        int jugador=0;
-        
-        if(turno % 2 == 0){
-            ficha='X';
-            jugador=1;
-        }else{
-            jugador=2;
-            ficha='O';
-        }
-    }
-
-    public Jugadores(Jugadores.Fichas fichas) {
-        this.fichas = fichas;
     }
 
     public Fichas getFichas() {
@@ -63,4 +24,7 @@ public class Jugadores {
         this.nombre = nombre;
     }
 
+    public void setFichas(Fichas fichas) {
+        this.fichas = fichas;
+    }
 }
