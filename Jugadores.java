@@ -3,16 +3,17 @@ public class Jugadores extends Juego {
 
     // VARIABLES
     private String nombre;
-    protected enum Fichas{X,O};
-    protected Fichas fichas;
+    //protected enum Fichas{X,O};
+    private char fichas;
 
     // CONSTRUCTORES
-    public Jugadores(String nombre, String fichas) {
+    public Jugadores(String nombre, char fichas) {
         this.nombre = nombre;
-        this.fichas = Fichas.valueOf(fichas);
+        this.fichas = fichas;
+        // Fichas.valueOf(fichas);
     }
 
-    public Fichas getFichas() {
+    public char getFichas() {
         return fichas;
     }
 
@@ -24,7 +25,7 @@ public class Jugadores extends Juego {
         this.nombre = nombre;
     }
 
-    public void setFichas(Fichas fichas) {
+    public void setFichas(char fichas) {
         this.fichas = fichas;
     }
 }

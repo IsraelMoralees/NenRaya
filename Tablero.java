@@ -1,6 +1,10 @@
+import java.util.Scanner;
+
 public class Tablero extends Juego {
+
     // VARIABLES
     private int empate=0;
+    protected char arrayTablero[][];
 
     // Constructor para el tablero
     public Tablero(int dimension) {
@@ -21,6 +25,24 @@ public class Tablero extends Juego {
             System.out.println();
         }
         System.out.println();
+    }
+
+    // Metodo para introducir casillas en el tablero
+    public void introducir() {
+        Scanner leer = new Scanner(System.in);
+        int fila = 0, columna = 0;
+
+        System.out.println("Jugador" + jugador + "es tu turno");
+        System.out.println("Introduce fila");
+        fila = leer.nextInt();
+        System.out.println("Introduce columna");
+        columna = leer.nextInt();
+        if ((arrayTablero[fila][columna] == 'X') || (arrayTablero[fila][columna] == 'O')) {
+            System.out.println("La fila " + fila + " y la columna " + columna + " Esta ocupada");
+            introducir();
+        } else {
+            arrayTablero[fila][columna] = j1.getFichas();
+        }
     }
 
     //Metodo para sumar la variable empate
