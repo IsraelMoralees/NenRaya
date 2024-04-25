@@ -1,6 +1,5 @@
 import java.util.Scanner;
-
-public class Tablero extends Juego {
+public class Tablero {
 
     // VARIABLES
     private int empate=0;
@@ -8,7 +7,6 @@ public class Tablero extends Juego {
 
     // Constructor para el tablero
     public Tablero(int dimension) {
-        super();
         arrayTablero = new char[dimension][dimension];
     }
 

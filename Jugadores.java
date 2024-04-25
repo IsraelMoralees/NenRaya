@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Jugadores extends Juego {
+public class Jugadores{
 
     // VARIABLES
     private String nombre;

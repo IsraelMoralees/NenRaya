@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public abstract class Juego {
+public class Juego {
     // Declaracion de las variables y objetos
     Jugadores j1 = new Jugadores("Israel", 'X');
     Jugadores j2 = new Jugadores("Israel", 'O');
