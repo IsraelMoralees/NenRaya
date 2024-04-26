@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Tablero {
+public class Tablero extends Juego {
 
     // VARIABLES
     private int empate=0;
@@ -29,8 +29,11 @@ public class Tablero {
     public void introducir() {
         Scanner leer = new Scanner(System.in);
         int fila = 0, columna = 0;
-
-        System.out.println("Jugador" + jugador + "es tu turno");
+        if (turno1==true){
+            System.out.println("Jugador " + j1.getNombre() + "es tu turno ");
+        }else{
+            System.out.println("Jugador " + j2.getNombre() + "es tu turno ");
+        }
         System.out.println("Introduce fila");
         fila = leer.nextInt();
         System.out.println("Introduce columna");
@@ -39,13 +42,13 @@ public class Tablero {
             System.out.println("La fila " + fila + " y la columna " + columna + " Esta ocupada");
             introducir();
         } else {
-            arrayTablero[fila][columna] = j1.getFichas();
+            if (turno1==true){
+                arrayTablero[fila][columna] = j1.getFichas();
+            }else{
+                arrayTablero[fila][columna] = j2.getFichas();
+            }
+            empate++;
         }
-    }
-
-    //Metodo para sumar la variable empate
-    public void SumaEmpate(){
-        empate++;
     }
 
     // Comprueba el empate
