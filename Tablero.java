@@ -5,6 +5,7 @@ public class Tablero extends Juego {
     private int empate=0;
     protected char arrayTablero[][];
 
+
     // Constructor para el tablero
     public Tablero(int dimension) {
         arrayTablero = new char[dimension][dimension];
