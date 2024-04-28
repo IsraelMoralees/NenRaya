@@ -30,9 +30,9 @@ public class Tablero extends Juego {
         Scanner leer = new Scanner(System.in);
         int fila = 0, columna = 0;
         if (turno1==true){
-            System.out.println("Jugador " + j1.getNombre() + "es tu turno ");
+            System.out.println("Jugador " + j1.getNombre() + " es tu turno ");
         }else{
-            System.out.println("Jugador " + j2.getNombre() + "es tu turno ");
+            System.out.println("Jugador " + j2.getNombre() + " es tu turno ");
         }
         System.out.println("Introduce fila");
         fila = leer.nextInt();
@@ -107,32 +107,39 @@ public class Tablero extends Juego {
     }
     
     // Comprueba la diagonal
-    private boolean ComprobarDiagonal() {
+    private boolean comprobarDiagonal() {
+        int contXDiagonal1 = 0;
+        int contODiagonal1 = 0;
+        int contXDiagonal2 = 0;
+        int contODiagonal2 = 0;
+
         for (int i = 0; i < arrayTablero.length; i++) {
-            int contX = 0;
-            int contO = 0;
-            for (int j = 0; j < arrayTablero.length; j++) {
-                if (arrayTablero[i + 1][j + 1] == 'X') {
-                    contX++;
-                } else if (arrayTablero[i + 1][j + 1] == 'O') {
-                    contO++;
-                }
+            if (arrayTablero[i][i] == 'X') {
+                contXDiagonal1++;
+            } else if (arrayTablero[i][i] == 'O') {
+                contODiagonal1++;
             }
-            if (contO == arrayTablero.length) {
-                System.out.println("Jugador O gana!");
-                return true;
-            } else if (contX == arrayTablero.length) {
-                System.out.println("Jugador X gana!");
-                return true;
+            if (arrayTablero[i][arrayTablero.length - 1 - i] == 'X') {
+                contXDiagonal2++;
+            } else if (arrayTablero[i][arrayTablero.length - 1 - i] == 'O') {
+                contODiagonal2++;
             }
         }
+
+        if (contODiagonal1 == arrayTablero.length || contODiagonal2 == arrayTablero.length) {
+            System.out.println("Jugador O gana!");
+            return true;
+        } else if (contXDiagonal1 == arrayTablero.length || contXDiagonal2 == arrayTablero.length) {
+            System.out.println("Jugador X gana!");
+            return true;
+        }
+
         return false;
     }
 
-
     // Metodo que decide de que forma se gana
     public boolean Fin() {
-        if (ComprobarCol() == true || ComprobarFilas() == true || Empate() == true) {
+        if (ComprobarCol() == true || ComprobarFilas() == true || Empate() == true || comprobarDiagonal() == true) {
             return true;
         }
         return false;
