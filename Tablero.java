@@ -1,9 +1,11 @@
 import java.util.Scanner;
-public class Tablero extends Juego {
+public class Tablero {
 
     // VARIABLES
     private int empate=0;
     protected char arrayTablero[][];
+    protected boolean turno1;
+    protected boolean turno2;
 
 
     // Constructor para el tablero
@@ -31,9 +33,9 @@ public class Tablero extends Juego {
         Scanner leer = new Scanner(System.in);
         int fila = 0, columna = 0;
         if (turno1==true){
-            System.out.println("Jugador " + j1.getNombre() + " es tu turno ");
-        }else{
-            System.out.println("Jugador " + j2.getNombre() + " es tu turno ");
+            System.out.println("Jugador 1 es tu turno ");
+        }else if (turno2==true){
+            System.out.println("Jugador 2 es tu turno ");
         }
         System.out.println("Introduce fila");
         fila = leer.nextInt();
@@ -44,14 +46,46 @@ public class Tablero extends Juego {
             introducir();
         } else {
             if (turno1==true){
-                arrayTablero[fila][columna] = j1.getFichas();
-            }else{
-                arrayTablero[fila][columna] = j2.getFichas();
+                arrayTablero[fila][columna] = 'X';
+            }else if (turno2==true){
+                arrayTablero[fila][columna] = 'O';
             }
             empate++;
         }
     }
+    //Metodo para cambiar de turno
+    public boolean CambiarTurno() {
+        if (turno1 == false) {
+            turno1 = true;
+            turno2 = false;
+        } else {
+            turno1 = false;
+            turno2 = true;
+        }
+        return turno1;
+    }
 
+    // Metodo para elegir quien empieza
+    public boolean ElegirComiezo(){
+        Scanner leer=new Scanner(System.in);
+        System.out.println("¿Quien quiere comenzar?");
+        int num = leer.nextInt();
+        if(num > 2){
+            System.out.println("Error, introduce un numero entre 1 y 2");
+            ElegirComiezo();
+        }else{
+            if (num==1){
+                turno1=true;
+                turno2=false;
+                return turno1;
+            }else{
+                turno2=true;
+                turno1=false;
+                return turno2;
+            }
+        }
+        return false;
+    }
     // Comprueba el empate
     private boolean Empate() {
         if (empate == arrayTablero.length * arrayTablero.length) {
