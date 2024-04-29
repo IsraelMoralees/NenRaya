@@ -17,6 +17,7 @@ public class Juego {
             cont++;
             int numTab = leer.nextInt();
             arrayMesas[i]=new Tablero(numTab);
+            arrayMesas[i].ElegirComiezo();
         }
     }
 
@@ -37,7 +38,6 @@ public class Juego {
         cantidadMesas();
         do{
             for (int i = 0; i < arrayMesas.length; i++){
-                arrayMesas[i].ElegirComiezo();
                 arrayMesas[i].rellenar();
                 arrayMesas[i].introducir();
                 arrayMesas[i].CambiarTurno();
