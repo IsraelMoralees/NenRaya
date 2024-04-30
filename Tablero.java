@@ -1,12 +1,14 @@
 import java.util.Scanner;
-public class Tablero {
-
+public class Tablero extends Juego{
     // VARIABLES
     private int empate=0;
     protected char arrayTablero[][];
-    protected boolean turno1;
-    protected boolean turno2;
-
+    private boolean turno1;
+    private boolean turno2;
+    private char ficha1;
+    private String nombre1;
+    private String nombre2;
+    private char ficha2;
 
     // Constructor para el tablero
     public Tablero(int dimension) {
@@ -17,7 +19,7 @@ public class Tablero {
     public void rellenar() {
         for (int i = 0; i < arrayTablero.length; i++) {
             for (int j = 0; j < arrayTablero.length; j++) {
-                if ((arrayTablero[i][j] == 'X') || (arrayTablero[i][j] == 'O')) {
+                if ((arrayTablero[i][j] == ficha1) || (arrayTablero[i][j] == ficha2)) {
                     System.out.print(arrayTablero[i][j]);
                 } else {
                     System.out.print(".");
@@ -30,28 +32,28 @@ public class Tablero {
 
     // Metodo para introducir casillas en el tablero
     public void introducir() {
-        Scanner leer = new Scanner(System.in);
-        int fila = 0, columna = 0;
-        if (turno1==true){
-            System.out.println("Jugador 1 es tu turno ");
-        }else if (turno2==true){
-            System.out.println("Jugador 2 es tu turno ");
-        }
-        System.out.println("Introduce fila");
-        fila = leer.nextInt();
-        System.out.println("Introduce columna");
-        columna = leer.nextInt();
-        if ((arrayTablero[fila][columna] == 'X') || (arrayTablero[fila][columna] == 'O')) {
-            System.out.println("La fila " + fila + " y la columna " + columna + " Esta ocupada");
-            introducir();
-        } else {
+            Scanner leer = new Scanner(System.in);
+            int fila = 0, columna = 0;
             if (turno1==true){
-                arrayTablero[fila][columna] = 'X';
+                System.out.println(nombre1 + " es tu turno ");
             }else if (turno2==true){
-                arrayTablero[fila][columna] = 'O';
+                System.out.println(nombre2 + " es tu turno ");
             }
-            empate++;
-        }
+            System.out.println("Introduce fila");
+            fila = leer.nextInt();
+            System.out.println("Introduce columna");
+            columna = leer.nextInt();
+            if ((arrayTablero[fila][columna] == ficha1) || (arrayTablero[fila][columna] == ficha2)) {
+                System.out.println("La fila " + fila + " y la columna " + columna + " Esta ocupada");
+                introducir();
+            } else {
+                if (turno1==true){
+                    arrayTablero[fila][columna] = ficha1;
+                }else if (turno2==true){
+                    arrayTablero[fila][columna] = ficha2;
+                }
+                empate++;
+            }
     }
     //Metodo para cambiar de turno
     public boolean CambiarTurno() {
@@ -66,21 +68,35 @@ public class Tablero {
     }
 
     // Metodo para elegir quien empieza
-    public boolean ElegirComiezo(){
-        Scanner leer=new Scanner(System.in);
-        System.out.println("¿Quien quiere comenzar?");
+    public boolean ElegirComiezo() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Jugador 1,introduzca su nombre");
+
+        nombre1 = leer.next();
+
+        System.out.println("Indique cual quiere que sea su ficha");
+        ficha1 = leer.next().charAt(0);
+        System.out.println("El jugador 1 es " + nombre1 + " y su ficha es " + ficha1);
+        System.out.println("Jugador 2,introduzca su nombre");
+
+        nombre2 = leer.next();
+
+        System.out.println("Indique cual quiere que sea su ficha");
+        ficha2 = leer.next().charAt(0);
+        System.out.println("El jugador 1 es " + nombre2 + " y su ficha es " + ficha2);
+        System.out.println("Quien quiere comenzar,el 1 o el 2?");
         int num = leer.nextInt();
-        if(num > 2){
+        if (num > 2) {
             System.out.println("Error, introduce un numero entre 1 y 2");
             ElegirComiezo();
-        }else{
-            if (num==1){
-                turno1=true;
-                turno2=false;
+        } else {
+            if (num == 1) {
+                turno1 = true;
+                turno2 = false;
                 return turno1;
-            }else{
-                turno2=true;
-                turno1=false;
+            } else {
+                turno2 = true;
+                turno1 = false;
                 return turno2;
             }
         }
@@ -98,20 +114,20 @@ public class Tablero {
     // Comprueba las filas
     private boolean ComprobarFilas() {
         for (int i = 0; i < arrayTablero.length; i++) {
-            int contX = 0;
-            int contO = 0;
+            int cont1 = 0;
+            int cont2 = 0;
             for (int j = 0; j < arrayTablero.length; j++) {
-                if (arrayTablero[i][j] == 'X') {
-                    contX++;
-                } else if (arrayTablero[i][j] == 'O') {
-                    contO++;
+                if (arrayTablero[i][j] == ficha1) {
+                    cont1++;
+                } else if (arrayTablero[i][j] == ficha2) {
+                    cont2++;
                 }
             }
-            if (contO == arrayTablero.length) {
-                System.out.println("Jugador O gana!");
+            if (cont2 == arrayTablero.length) {
+                System.out.println(nombre1+" gana!");
                 return true;
-            } else if (contX == arrayTablero.length) {
-                System.out.println("Jugador X gana!");
+            } else if (cont1 == arrayTablero.length) {
+                System.out.println(nombre2+" gana!");
                 return true;
             }
         }
@@ -121,20 +137,20 @@ public class Tablero {
     // Comprueba las columnas
     private boolean ComprobarCol() {
         for (int i = 0; i < arrayTablero.length; i++) {
-            int contX = 0;
-            int contO = 0;
+            int cont1 = 0;
+            int cont2 = 0;
             for (int j = 0; j < arrayTablero.length; j++) {
-                if (arrayTablero[j][i] == 'X') {
-                    contX++;
-                } else if (arrayTablero[j][i] == 'O') {
-                    contO++;
+                if (arrayTablero[j][i] == ficha1) {
+                    cont1++;
+                } else if (arrayTablero[j][i] == ficha2) {
+                    cont2++;
                 }
             }
-            if (contO == arrayTablero.length) {
-                System.out.println("Jugador O gana!");
+            if (cont2 == arrayTablero.length) {
+                System.out.println(nombre1+" gana!");
                 return true;
-            } else if (contX == arrayTablero.length) {
-                System.out.println("Jugador X gana!");
+            } else if (cont1 == arrayTablero.length) {
+                System.out.println(nombre2+" gana!");
                 return true;
             }
         }
@@ -149,26 +165,25 @@ public class Tablero {
         int contODiagonal2 = 0;
 
         for (int i = 0; i < arrayTablero.length; i++) {
-            if (arrayTablero[i][i] == 'X') {
+            if (arrayTablero[i][i] == ficha1) {
                 contXDiagonal1++;
-            } else if (arrayTablero[i][i] == 'O') {
+            } else if (arrayTablero[i][i] == ficha2) {
                 contODiagonal1++;
             }
-            if (arrayTablero[i][arrayTablero.length - 1 - i] == 'X') {
+            if (arrayTablero[i][arrayTablero.length - 1 - i] == ficha1) {
                 contXDiagonal2++;
-            } else if (arrayTablero[i][arrayTablero.length - 1 - i] == 'O') {
+            } else if (arrayTablero[i][arrayTablero.length - 1 - i] == ficha2) {
                 contODiagonal2++;
             }
-        }
 
-        if (contODiagonal1 == arrayTablero.length || contODiagonal2 == arrayTablero.length) {
-            System.out.println("Jugador O gana!");
-            return true;
-        } else if (contXDiagonal1 == arrayTablero.length || contXDiagonal2 == arrayTablero.length) {
-            System.out.println("Jugador X gana!");
-            return true;
+            if (contODiagonal1 == arrayTablero.length || contODiagonal2 == arrayTablero.length) {
+                System.out.println(nombre1+" gana!");
+                return true;
+            } else if (contXDiagonal1 == arrayTablero.length || contXDiagonal2 == arrayTablero.length) {
+                System.out.println(nombre2+" gana!");
+                return true;
+            }
         }
-
         return false;
     }
 
@@ -180,3 +195,16 @@ public class Tablero {
         return false;
     }
 }
+
+
+/*
+
+    CAMBIAR TURNO CON JUGADORES
+
+for (int i=0;i < arrayTablero.length; i++){
+        if (arrayJugadores[i].isTurno()==true){
+arrayJugadores[i].setTurno(false);
+                }
+                        }
+
+ */

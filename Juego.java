@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class Juego {
     // Declaracion de las variables y objetos
-    Jugadores j1 = new Jugadores("israel", 'X');
-    Jugadores j2 = new Jugadores("pepe", 'O');
     Tablero [] arrayMesas;
+
+    Jugadores [] arrayJugadores;
 
     private void cantidadMesas (){
         Scanner leer=new Scanner(System.in);
@@ -45,3 +45,24 @@ public class Juego {
         }while (!finJuego());
     }
 }
+
+/*
+
+                CANTIDAD JUGADORES CON ARRAY
+private void cantJugadores (){
+        Scanner leer=new Scanner(System.in);
+        System.out.println("Cuantos jugadores van a jugar?");
+        int num = leer.nextInt();
+        arrayJugadores = new Jugadores[num];
+        int cont=1;
+        for (int i = 0; i < arrayJugadores.length; i++) {
+            System.out.println("Jugador "+ cont + " ,introduzca su nombre");
+            nombre1 = leer.next();
+            System.out.println("Indique cual quiere que sea su ficha");
+            ficha1 = leer.next().charAt(0);
+            arrayJugadores[i] = new Jugadores (nombre1, ficha1);
+            System.out.println("El jugador "+ cont + " es " + arrayJugadores[i].getNombre() + " y su ficha es " + arrayJugadores[i].getFichas());
+            cont++;
+        }
+    }
+ */
