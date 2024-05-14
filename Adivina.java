@@ -1,8 +1,8 @@
 import java.util.Scanner;
 public class Adivina extends Juego {
-    int intentos=0;
-    int num;
-    int numAle = (int) (Math.random()*10);
+    private int intentos=0;
+    private int num;
+    private int numAle = (int) (Math.random()*10);
     private boolean finJuego=false;
     public void Partida(){
         Scanner leer = new Scanner(System.in);

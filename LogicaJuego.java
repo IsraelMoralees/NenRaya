@@ -25,17 +25,17 @@ public class LogicaJuego{
 
     public void Jugar(){
         RellenarArray();
-            for (int i=0;i < arrayMesas.length; i++){
-                if (arrayMesas[i].Aux()){
-                }else{
-                    arrayMesas[i].Partida();
-                }
-                if ((i==arrayMesas.length - 1)&&(!finJuego())){
-                    i=-1;
-                }
+        for (int i=0;i < arrayMesas.length; i++){
+            if (arrayMesas[i].Aux()){
+            }else{
+                arrayMesas[i].Partida();
             }
+            if ((i==arrayMesas.length - 1)&&(!finJuego())){
+                i=-1;
+            }
+        }
     }
-    public boolean finJuego(){
+    private boolean finJuego(){
         int cont=0;
         for (int i = 0; i < arrayMesas.length; i++){
             if(arrayMesas[i].Fin()){
