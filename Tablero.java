@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Tablero extends Juego{
+public class Tablero extends Juego {
     // VARIABLES
     private int empate=0;
     protected char arrayTablero[][];
@@ -9,10 +9,11 @@ public class Tablero extends Juego{
     private String nombre1;
     private String nombre2;
     private char ficha2;
+    private int contadorPartida=0;
+    private boolean finJuego;
 
     // Constructor para el tablero
-    public Tablero(int dimension) {
-        arrayTablero = new char[dimension][dimension];
+    public Tablero() {
     }
 
     // Metodo para mostrar el tablero del juego
@@ -28,6 +29,13 @@ public class Tablero extends Juego{
             System.out.println();
         }
         System.out.println();
+    }
+
+    private void TamañoMesa(){
+        Scanner leer = new Scanner(System.in);
+        System.out.println("De cuanto quieres que sea el tablero");
+        int dimension=leer.nextInt();
+        arrayTablero = new char[dimension][dimension];
     }
 
     // Metodo para introducir casillas en el tablero
@@ -71,14 +79,13 @@ public class Tablero extends Juego{
     public boolean ElegirComiezo() {
         Scanner leer = new Scanner(System.in);
         System.out.println("Jugador 1,introduzca su nombre");
-
         nombre1 = leer.next();
 
         System.out.println("Indique cual quiere que sea su ficha");
         ficha1 = leer.next().charAt(0);
         System.out.println("El jugador 1 es " + nombre1 + " y su ficha es " + ficha1);
-        System.out.println("Jugador 2,introduzca su nombre");
 
+        System.out.println("Jugador 2,introduzca su nombre");
         nombre2 = leer.next();
 
         System.out.println("Indique cual quiere que sea su ficha");
@@ -190,21 +197,26 @@ public class Tablero extends Juego{
     // Metodo que decide de que forma se gana
     public boolean Fin() {
         if (ComprobarCol() == true || ComprobarFilas() == true || Empate() == true || comprobarDiagonal() == true) {
+            finJuego=true;
             return true;
         }
+        finJuego=false;
         return false;
     }
+
+    public boolean Aux(){
+        return finJuego;
+    }
+
+    public void Partida(){
+        if (contadorPartida==0){
+            TamañoMesa();
+            ElegirComiezo();
+            contadorPartida++;
+        }
+        rellenar();
+        introducir();
+        CambiarTurno();
+        Fin();
+    }
 }
-
-
-/*
-
-    CAMBIAR TURNO CON JUGADORES
-
-for (int i=0;i < arrayTablero.length; i++){
-        if (arrayJugadores[i].isTurno()==true){
-arrayJugadores[i].setTurno(false);
-                }
-                        }
-
- */

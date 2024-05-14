@@ -1,9 +1,7 @@
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Juego juego1 = new Juego();
+        LogicaJuego j1 = new LogicaJuego();
 
-        juego1.partida();
+        j1.Jugar();
     }
 }
