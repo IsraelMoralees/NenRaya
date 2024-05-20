@@ -1,14 +1,14 @@
-import java.util.Scanner;
 
+import java.util.Scanner;
 public class LogicaJuego{
     // Declaracion de las variables y objetos
-     Juego [] arrayMesas;
+    Juego [] arrayMesas;
 
     private void RellenarArray (){
         Scanner leer = new Scanner(System.in);
         System.out.println("Cuantas mesas quieres tener");
         int num = leer.nextInt();
-        arrayMesas = new Juego[num];
+        arrayMesas=new Juego[num];
         for (int i=0;i < arrayMesas.length; i++){
             System.out.println("1. para N en raya, 2. para Adivina el numero");
             int num2 = leer.nextInt();
@@ -47,6 +47,4 @@ public class LogicaJuego{
         }
         return false;
     }
-
-
 }

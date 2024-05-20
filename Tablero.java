@@ -1,26 +1,55 @@
+import javax.xml.bind.annotation.*;
 import java.util.Scanner;
+
+@XmlRootElement(name = "Datos")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Tablero extends Juego {
-    // VARIABLES
-    private int empate=0;
-    protected char arrayTablero[][];
+    @XmlElement(name = "nombre")
+    private String nombre1;
+    @XmlElement(name = "nombre2")
+    private String nombre2;
+    @XmlElement(name = "ficha")
+    private char fichaJ1;
+    @XmlElement(name = "ficha2")
+    private char fichaJ2;
+    @XmlElement(name = "comienzo")
+    private int numComienzo;
+    @XmlElement(name = "tamaño")
+    private int dimension;
+
+    private int empate = 0;
+    protected char[][] arrayTablero;
     private boolean turnoJ1;
     private boolean turnoJ2;
-    private char fichaJ1;
-    private String nombre1;
-    private String nombre2;
-    private char fichaJ2;
-    private int contadorPartida=0;
+    private int contadorPartida = 0;
     private boolean finJuego;
 
-    // Constructor para el tablero
+
+    // Getters y Setters
+    public String getNombre1() { return nombre1; }
+    public String getNombre2() { return nombre2; }
+    public char getFichaJ1() { return fichaJ1; }
+    public char getFichaJ2() { return fichaJ2; }
+    public int getNumComienzo() { return numComienzo; }
+    public int getDimension() { return dimension; }
+
+    // Constructores para el tablero
     public Tablero() {
+    }
+    public Tablero(String nombre1, String nombre2, char fichaJ1, char fichaJ2, int numComienzo, int dimension) {
+        this.nombre1 = nombre1;
+        this.nombre2 = nombre2;
+        this.fichaJ1 = fichaJ1;
+        this.fichaJ2 = fichaJ2;
+        this.numComienzo = numComienzo;
+        this.dimension = dimension;
     }
 
     // Metodo para mostrar el tablero del juego
     private void rellenar() {
         for (int i = 0; i < arrayTablero.length; i++) {
             for (int j = 0; j < arrayTablero.length; j++) {
-                if ((arrayTablero[i][j] == fichaJ1) || (arrayTablero[i][j] == fichaJ2)) {
+                if ((arrayTablero[i][j] == this.fichaJ1) || (arrayTablero[i][j] == this.fichaJ2)) {
                     System.out.print(arrayTablero[i][j]);
                 } else {
                     System.out.print(".");
@@ -34,9 +63,42 @@ public class Tablero extends Juego {
     private void TamañoMesa(){
         Scanner leer = new Scanner(System.in);
         System.out.println("De cuanto quieres que sea el tablero");
-        int dimension=leer.nextInt();
+        //dimension=leer.nextInt();
         arrayTablero = new char[dimension][dimension];
     }
+
+    /* Metodo para elegir quien empieza
+    private boolean ElegirComiezo() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Jugador 1,introduzca su nombre");
+        nombre1 = leer.next();
+        System.out.println("Indique cual quiere que sea su ficha");
+        fichaJ1 = leer.next().charAt(0);
+
+        System.out.println("Jugador 2,introduzca su nombre");
+        nombre2 = leer.next();
+        System.out.println("Indique cual quiere que sea su ficha");
+        fichaJ2 = leer.next().charAt(0);
+
+        System.out.println("Quien quiere comenzar,el 1 o el 2?");
+        numComienzo = leer.nextInt();
+        if (numComienzo > 2) {
+            System.out.println("Error, introduce un numero entre 1 y 2");
+            ElegirComiezo();
+        } else {
+            if (numComienzo == 1) {
+                turnoJ1 = true;
+                turnoJ2 = false;
+                return turnoJ1;
+            } else {
+                turnoJ2 = true;
+                turnoJ1 = false;
+                return turnoJ2;
+            }
+        }
+        return false;
+    }
+     */
 
     // Metodo para introducir casillas en el tablero
     private void introducir() {
@@ -75,37 +137,6 @@ public class Tablero extends Juego {
         return turnoJ1;
     }
 
-    // Metodo para elegir quien empieza
-    private boolean ElegirComiezo() {
-        Scanner leer = new Scanner(System.in);
-        System.out.println("Jugador 1,introduzca su nombre");
-        nombre1 = leer.next();
-        System.out.println("Indique cual quiere que sea su ficha");
-        fichaJ1 = leer.next().charAt(0);
-
-        System.out.println("Jugador 2,introduzca su nombre");
-        nombre2 = leer.next();
-        System.out.println("Indique cual quiere que sea su ficha");
-        fichaJ2 = leer.next().charAt(0);
-
-        System.out.println("Quien quiere comenzar,el 1 o el 2?");
-        int num = leer.nextInt();
-        if (num > 2) {
-            System.out.println("Error, introduce un numero entre 1 y 2");
-            ElegirComiezo();
-        } else {
-            if (num == 1) {
-                turnoJ1 = true;
-                turnoJ2 = false;
-                return turnoJ1;
-            } else {
-                turnoJ2 = true;
-                turnoJ1 = false;
-                return turnoJ2;
-            }
-        }
-        return false;
-    }
     // Comprueba el empate
     private boolean Empate() {
         if (empate == arrayTablero.length * arrayTablero.length) {
@@ -208,7 +239,7 @@ public class Tablero extends Juego {
     public void Partida(){
         if (contadorPartida==0){
             TamañoMesa();
-            ElegirComiezo();
+            //ElegirComiezo();
             contadorPartida++;
         }
         rellenar();
