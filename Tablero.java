@@ -2,6 +2,7 @@ import javax.xml.bind.annotation.*;
 import java.util.Scanner;
 
 @XmlRootElement(name = "Datos")
+@XmlType(propOrder = {"nombre1", "nombre2", "fichaJ1", "fichaJ2", "numComienzo", "dimension", "empate", "arrayTablero", "turnoJ1", "turnoJ2", "contadorPartida", "finJuego"})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Tablero extends Juego {
     @XmlElement(name = "nombre")
