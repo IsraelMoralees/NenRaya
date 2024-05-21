@@ -2,8 +2,8 @@
 <Datos>
     <nombre>Martin</nombre>
     <nombre2>Juan</nombre2>
-    <ficha>X</ficha>
-    <ficha2>O</ficha2>
+    <ficha>B</ficha>
+    <ficha2>A</ficha2>
     <comienzo>2</comienzo>
     <tamaño>4</tamaño>
 </Datos>

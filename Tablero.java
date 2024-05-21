@@ -28,11 +28,17 @@ public class Tablero extends Juego {
 
     // Getters y Setters
     public String getNombre1() { return nombre1; }
+    public void setNombre1(String nombre1) { this.nombre1 = nombre1; }
     public String getNombre2() { return nombre2; }
+    public void setNombre2(String nombre2) { this.nombre2 = nombre2; }
     public char getFichaJ1() { return fichaJ1; }
+    public void setFichaJ1(String fichaJ1) { this.fichaJ1 = fichaJ1.charAt(0); }
     public char getFichaJ2() { return fichaJ2; }
+    public void setFichaJ2(String fichaJ2) { this.fichaJ2 = fichaJ2.charAt(0); }
     public int getNumComienzo() { return numComienzo; }
+    public void setNumComienzo(int numComienzo) { this.numComienzo = numComienzo; }
     public int getDimension() { return dimension; }
+    public void setDimension(int dimension) { this.dimension = dimension; }
 
     // Constructores para el tablero
     public Tablero() {
@@ -50,7 +56,7 @@ public class Tablero extends Juego {
     private void rellenar() {
         for (int i = 0; i < arrayTablero.length; i++) {
             for (int j = 0; j < arrayTablero.length; j++) {
-                if ((arrayTablero[i][j] == this.fichaJ1) || (arrayTablero[i][j] == this.fichaJ2)) {
+                if ((arrayTablero[i][j] == fichaJ1) || (arrayTablero[i][j] == fichaJ2)) {
                     System.out.print(arrayTablero[i][j]);
                 } else {
                     System.out.print(".");
